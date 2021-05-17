@@ -7,9 +7,8 @@
 | nickname                        | string     | null: false                    |
 | email                           | string     | null: false, unique:true       |
 | encrypted_password              | string     | null: false                    |
-| encrypted_password_confirmation | string     | null: false                    |
 | last_name                       | string     | null: false                    |
-| first_name                       | string     | null: false                    |
+| first_name                       | string     | null: false                   |
 | last_name_reading               | string     | null: false                    |
 | first_name_reading              | string     | null: false                    |
 | birthday                        | date       | null: false                    |
@@ -51,7 +50,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :addresse
+- has_one :address
 
 ## addresses テーブル
 
