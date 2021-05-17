@@ -1,24 +1,68 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | ------------------------------ |
+| nickname              | string     | null: false                    |
+| email                 | string     | null: false                    |
+| password              | string     | null: false                    |
+| password_confirmation | string     | null: false                    |
+| name                  | string     | null: false                    |
+| name_reading          | string     | null: false                    |
+| birthday              | date       | null: false                    |
 
-* Ruby version
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :items
+- has_many :purchase_records
 
-* Database creation
+## items テーブル
 
-* Database initialization
+| Column                       | Type       | Options                        |
+| ---------------------------- | ---------- | ------------------------------ |
+| user_id                      | references | null: false, foreign_key: true |
+| image_id                     | references | null: false, foreign_key: true |
+| item_name                    | string     | null: false, foreign_key: true |
+| text                         | text       | null: false, foreign_key: true |
+| category_id                  | integer    | null: false                    |
+| status_id                    | integer    | null: false                    |
+| delivery_charge_id           | integer    | null: false                    |
+| prefecture_id                | integer    | null: false                    |
+| delivery_days_id             | integer    | null: false                    | 
+| price                        | integer    | null: false                    |
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+- has_one :purchase_record
+- belongs_to :user
 
-* ...
+## purchase_records テーブル
+
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| user_id   | references | null: false, foreign_key: true |
+| item_id   | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :addresse
+
+## addresses テーブル
+
+| Column           | Type       | Options     |
+| ---------------- | ---------- | ------------|
+| postcode         | string     | null: false |
+| prefecture_id    | integer    | null: false |
+| city             | string     | null: false |
+| block            | string     | null: false |
+| building         | string     | null: false |
+| phone_number     | string     | null: false |
+
+### Association
+
+- belongs_to :purchase_record
