@@ -9,7 +9,7 @@
 | encrypted_password              | string     | null: false                    |
 | encrypted_password_confirmation | string     | null: false                    |
 | last_name                       | string     | null: false                    |
-| first_nam                       | string     | null: false                    |
+| first_name                       | string     | null: false                    |
 | last_name_reading               | string     | null: false                    |
 | first_name_reading              | string     | null: false                    |
 | birthday                        | date       | null: false                    |
@@ -25,7 +25,7 @@
 | Column                       | Type       | Options                        |
 | ---------------------------- | ---------- | ------------------------------ |
 | user                         | references | null: false, foreign_key: true |
-| item_name                    | string     | null: false                    |
+| name                         | string     | null: false                    |
 | text                         | text       | null: false                    |
 | category_id                  | integer    | null: false                    |
 | status_id                    | integer    | null: false                    |
