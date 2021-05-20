@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  has_many :items
-  has_many :purchase_records
-  has_one_attached :image
+  # has_many :items
+  # has_many :purchase_records
+  
 
   with_options presence: true do
     validates :nickname
