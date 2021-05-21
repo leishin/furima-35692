@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name, { length: { maximum: 40 } }
     validates :text, { length: { maximum: 1000 } }
+    validates :image
     with_options numericality: { other_than: 0 } do
       validates :category_id
       validates :status_id
