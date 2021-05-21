@@ -12,12 +12,12 @@ RSpec.describe Item, type: :model do
       end
 
       it 'nameが40文字以下だと登録できること' do
-        @item.name = 'a'*40
+        @item.name = 'a' * 40
         expect(@item).to be_valid
       end
 
       it 'textが1000文字以下だと登録できること' do
-        @item.text = 'a'*1000
+        @item.text = 'a' * 1000
         expect(@item).to be_valid
       end
 
@@ -45,7 +45,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'imageが空では登録できないこと' do
-        @item.image=nil
+        @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
@@ -117,27 +117,27 @@ RSpec.describe Item, type: :model do
       end
 
       it 'nameが41文字以上だと登録できないこと' do
-        @item.name = 'a'*41
+        @item.name = 'a' * 41
         @item.valid?
         expect(@item.errors.full_messages).to include('Name is too long (maximum is 40 characters)')
       end
 
       it 'textが1001文字以上だと登録できないこと' do
-        @item.text = 'a'*1001
+        @item.text = 'a' * 1001
         @item.valid?
         expect(@item.errors.full_messages).to include('Text is too long (maximum is 1000 characters)')
       end
 
       it 'priceが半角英数字混合では登録できない' do
-        @item.price='11aa'
+        @item.price = '11aa'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'priceが半角英字のみでは登録できない' do
-        @item.price='aaaa'
+        @item.price = 'aaaa'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
     end
   end
