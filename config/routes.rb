@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   # get 'users/index'
   # resources  :users
   resources :items do
-    resources :purchase_records
+    resources :purchase_records, only: [:index, :create]
   end
 end

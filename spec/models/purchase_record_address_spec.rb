@@ -24,10 +24,30 @@ RSpec.describe PurchaseRecordAddress, type: :model do
     end
 
     context '内容に問題がある場合' do
+      it 'tokenが空だと保存できないこと' do
+        @purchase_record_address.token = ''
+        @purchase_record_address.valid?
+        expect(@purchase_record_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'userが紐付いていないと保存できないこと' do
+        @purchase_record_address.user_id = nil
+        @purchase_record_address.valid?
+        expect(@purchase_record_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていないと保存できないこと' do
+        @purchase_record_address.item_id = nil
+        @purchase_record_address.valid?
+        expect(@purchase_record_address.errors.full_messages).to include("Item can't be blank")
+      end
       it 'postcodeが空だと保存できないこと' do
         @purchase_record_address.postcode = ''
         @purchase_record_address.valid?
         expect(@purchase_record_address.errors.full_messages).to include("Postcode can't be blank")
+      end
+      it 'postcodeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
+        @purchase_record_address.postcode = '1234567'
+        @purchase_record_address.valid?
+        expect(@purchase_record_address.errors.full_messages).to include('Postcode is invalid')
       end
       it 'cityが空だと保存できないこと' do
         @purchase_record_address.city = ''
@@ -39,35 +59,15 @@ RSpec.describe PurchaseRecordAddress, type: :model do
         @purchase_record_address.valid?
         expect(@purchase_record_address.errors.full_messages).to include("Block can't be blank")
       end
-      it 'phone_numberが空だと保存できないこと' do
-        @purchase_record_address.phone_number = ''
-        @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Phone number can't be blank", 'Phone number is invalid')
-      end
-      it 'tokenが空だと保存できないこと' do
-        @purchase_record_address.token = ''
-        @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Token can't be blank")
-      end
-      it 'postcodeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
-        @purchase_record_address.postcode = '1234567'
-        @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include('Postcode is invalid')
-      end
       it 'prefecture_idを選択していないと保存できないこと' do
         @purchase_record_address.prefecture_id = 0
         @purchase_record_address.valid?
         expect(@purchase_record_address.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'userが紐付いていないと保存できないこと' do
-        @purchase_record_address.user_id = nil
+      it 'phone_numberが空だと保存できないこと' do
+        @purchase_record_address.phone_number = ''
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("User can't be blank")
-      end
-      it 'itemが紐付いていないと保存できないこと' do
-        @purchase_record_address.item_id = nil
-        @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Item can't be blank")
+        expect(@purchase_record_address.errors.full_messages).to include("Phone number can't be blank", 'Phone number is invalid')
       end
       it 'phone_numberが全角数字だと保存できないこと' do
         @purchase_record_address.phone_number = '０９０１２３４５６７８'

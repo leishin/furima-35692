@@ -7,9 +7,6 @@ class PurchaseRecordsController < ApplicationController
     @purchase_record_address = PurchaseRecordAddress.new
   end
 
-  def new
-  end
-
   def create
     @purchase_record_address = PurchaseRecordAddress.new(purchase_record_params)
     if @purchase_record_address.valid?
