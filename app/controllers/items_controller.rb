@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :pro_item, only: [:edit, :update, :destroy]
+  before_action :set_order, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -43,6 +44,10 @@ class ItemsController < ApplicationController
 
   def pro_item
     redirect_to root_path unless current_user.id == @item.user_id
+  end
+
+  def set_order
+    redirect_to root_path if @item.purchase_record.present?
   end
 
   def set_item
